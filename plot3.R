@@ -14,7 +14,7 @@ SCC <- readRDS("Source_Classification_Code.rds")
 data<-transform(NEI,year=factor(year))
 Baltimoredata <- data[data$fips=="24510",]
 
-## Plyr functionto use the ddply function to summarize sum of Emissions
+## Plyr package to use the ddply function to summarize sum of Emissions
 plottingdata <- ddply(Baltimoredata,.(year,type),summarize,sum=sum(Emissions))
 png("plot3.png")
 gplot <- ggplot(plottingdata,aes(year,sum))

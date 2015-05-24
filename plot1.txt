@@ -9,11 +9,10 @@ NEI <- readRDS("summarySCC_PM25.rds")
 SCC <- readRDS("Source_Classification_Code.rds")
 ## Converting year  to a Factor to plot against Emission totals
 data<-transform(NEI,year=factor(year))
-Baltimoredata <- data[data$fips=="24510",]
 
-## Plyr package to use the ddply function to summarize sum of Emissions
-plottingdata <- ddply(Baltimoredata,.(year),summarize,sum=sum(Emissions))
-png("plot2.png")
-plot(plottingdata$year,plottingdata$sum,type="n",xlab="year",ylab="total PM2.5 Emission in Baltimore")
+## Plyr functionto use the ddply function to summarize sum of Emissions
+plottingdata <- ddply(data,.(year),summarize,sum=sum(Emissions))
+png("plot1.png")
+plot(plottingdata$year,plottingdata$sum,type="n",xlab="year",ylab="total PM2.5 Emission")
 lines(plottingdata$year,plottingdata$sum)
 dev.off()
